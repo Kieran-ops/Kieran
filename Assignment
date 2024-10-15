@@ -1,0 +1,256 @@
+# Function to run the game
+
+import time
+import random
+import sys
+
+def get_input(prompt=""):
+    return input(prompt).strip().lower()
+
+def print1(text):
+    for letter in text:
+        sys.stdout.write(letter)
+        sys.stdout.flush()
+        time.sleep(0.05)
+    print()
+
+def start_game():
+    # Reset game state for a new game
+    game_state = {
+        "truth_mirror_shards": 0,
+        "scarf": False,
+        "jacket": False,
+        "ruler": False,
+        "protractor": False,
+        "pencil": False,
+        "scissors": False,
+    }
+    return game_state
+
+def roll_dice():
+    return random.randint(1, 6)
+
+
+if __name__ == "__main__":
+    print1("Welcome to the game!")
+    game_state = start_game()
+
+    # Introduction: Simon's Morning
+    print1("16/2/2002 Scranton, Pennsylvania.")
+    print1("Simon is awakened by the ear-piercing noise of his alarm clock.")
+    print1("He quickly silences it and stares blankly at the ceiling before getting out of bed.")
+    print1("He looks at his scarred, pale body in the mirror, analyzing his scars, particularly the one at the two ends of his mouth.")
+    print1("'Disgusting,' he whispers to himself.")
+
+    # Sister Yuri's Room - First Choice
+    print1("\nSimon checks on his sick sister Yuri, finding her fast asleep.")
+    print1("He notices some books scattered around her room.")
+    choice1 = get_input("Do you want to (1) leave the books and let her rest, or (2) clean up quietly? ")
+
+    if choice1 == "2":
+        print1("You quietly clean up her room, picking up the scattered books without disturbing her.")
+        game_state["truth_mirror_shards"] += 1  # Collect a Memory Shard
+    else:
+        print1("You leave her to rest, stepping out quietly.")
+
+    # Getting Ready for School - Second Choice
+    print1("\nSimon looks at his coat rack. Being January, he knows he should dress warmly.")
+    choice2 = get_input("Do you want to wear (1) a scarf or (2) a jacket? ")
+
+    if choice2 == "1":
+        print1("You wrap the scarf around your neck, feeling slightly warmer.")
+        game_state["scarf"] = True
+    else:
+        print1("You put on your jacket, bracing yourself for the cold outside.")
+        game_state["jacket"] = True
+
+    # Walking to School
+    if game_state["scarf"]:
+        print1("\nSimon begins walking to school, his scarf wrapped tightly around his neck.")
+    else:
+        print1("\nSimon begins walking to school, bundled in his jacket, trying to stay warm.")
+       
+    print1("He feels the cold snowflakes tickle the back of his neck, a sensation that's almost pleasant.")
+    print1("After a few minutes, he arrives at the school, which he always found incredibly boring.")
+    print1("'Looks like it was built in the damn 40s,' he mutters as he enters.")
+
+    # In Class - Third Choice
+    print1("\nSimon sits in his first class of the day, lost in thought, when the teacher calls on him.")
+    print1("'Ahem, Mr. Heron, are you listening?'")
+    print1("'N-No sir,' Simon replies.")
+    print1("'Then get up here and solve this equation.' The teacher points to the whiteboard.")
+
+    choice3 = get_input("Do you want to take (1) a ruler or (2) a protractor? ")
+
+    if choice3 == "1":
+        print1("You grab your ruler just in case.")  
+        game_state["ruler"] = True 
+    else:
+        print1("You grab your protractor just in case.")
+        game_state["protractor"] = True
+
+    # Teacher Reaction
+    if game_state["ruler"]:
+        print1("\nThe teacher laughs. 'Stupid Mr. Heron, this equation doesn't need a ruler!'")
+    else:
+        print1("\nThe teacher laughs. 'Stupid Mr. Heron, this equation doesn't need a protractor!'")
+       
+    print1("Embarrassed, you put your tool back in your pocket.")
+
+    # Dice Roll Tutorial
+    print1("\n(Tutorial) Yuri's Dice: When Simon doesn't have the correct item, you'll roll a die to determine success or failure.")
+    print1("Press 1 to roll the dice and see if Simon solves the equation.")
+
+    roll = get_input("Roll the dice (press 1): ")
+
+    if roll == "1":
+        dice = roll_dice()
+        print1(f"\nYou rolled a {dice}.")
+       
+        if dice >= 4:
+            print1("You solve the equation and sit back down, relieved.")
+        else:
+            print1("You fail to solve the equation, feeling embarrassed as you return to your seat.")
+        game_state["dice"] = dice
+
+    # Lunch break choices
+    lunch_choice = get_input("\nAfter Math class, you have a break for lunch.\n(Option 1) Stay at school and eat your sandwich\n(Option 2) Go home to check on Yuri\nChoose an option (1 or 2): ")
+
+    if lunch_choice == "1":
+        print1("You decide to stay at school, spending your free hour listening to music on your iPod.")
+    elif lunch_choice == "2":
+        print1("You decide to go check on your sister. On your way back, you see a friendly dog...")
+
+        dog_choice = get_input("\n(Option 1) Leave the dog alone\n(Option 2) Pet the dog\nChoose an option (1 or 2): ")
+       
+        if dog_choice == "1":
+            print1("You decide to leave the dog alone, leaving it looking sad.")
+        elif dog_choice == "2":
+            game_state["truth_mirror_shards"] += 1
+            print1("You decide to pet the dog through the fence. It seems very happy with you and runs to its dog house.")
+            print1("Simon lets out a soft smile looking at the dog and its innocence.")
+            print1("When the dog comes back, it seems to have something in its mouth: a broken piece of glass.")
+            print1("As you reach out to touch it, you feel a familiar spike of pain in your head...")
+            print1("You see flashes of your sister screaming at your mother and your own blood on your hand.")
+            print1("You quickly snap out of it, backing away from the dog. You give it one last goodbye before making your way to Yuri.")
+
+    # Returning to Yuri
+    print1("\nYou make your way back home after a couple of minutes to find your sister Yuri safe and sound in her bed.")
+    print1("As she sleeps, Simon examines the tired look on her face.")
+    print1("He thinks about all the stress and anxiety she must have having to take care of him.")
+    print1("He quickly leaves her to rest before going back to school.")
+    
+    print1("Simon makes it back to school 5 minutes late and is scolded before going through with his normal school day.")
+    print1("After the bell rings, he pushes through the waves of people to get to the entrance of the school, being tossed and squished like a rag doll.")
+    
+    print1("Eventually, he does make it to the entrance of the school, but it seems he forgot his iPod in his class.")
+
+    # Choices about the iPod
+    ipod_choice = get_input("\nDo you want to (1) go back to get your iPod or (2) leave it? ")
+
+    if ipod_choice == "1":
+        print1("\nYou decide to go back to get your iPod.")
+        print1("Just as you turn around to start making your way back, suddenly the school goes dark.")
+        print1("The bustling hallways and cramped space turn empty and quiet. Simon looks around as he is the only one in the school.")
+        print1("What the hell? he says, but no one responds. It's just him in a dark school alone, like a horror movie. His voice echoes throughout the halls.")
+        print1("He squints his eyes to see a dark figure across from him with glowing red eyes.")
+        print1("Ahhhh! Simon stumbles backwards, falling onto his backpack, his gaze locked with what looks to be a demon.")
+        print1("The contents of his backpack spill all over the floor and he reaches for something to protect himself.")
+
+        # Subchoices for self-defense
+        self_defense_choice = get_input("\nDo you want to reach for (1) your pencil or (2) your scissors? ")
+
+        if self_defense_choice == "1":
+            print1("\nYou reach for your pencil, feeling it might not help much against the demon.")
+            game_state["pencil"] = True  # Set pencil to True
+            print1("The demon giggles. 'Simon, Simon, Simon, you always were a fighter, weren't you?'")
+            print1("'That fight in you must have given your sister such a hard time. I think we both know that.'")
+            print1("The entity tilts its head with a murderous grin.")
+            print1("'What the hell are you!' Simon shouts, scrambling off the floor, getting some distance between him and the entity.")
+            print1("'Oh Mr. Heron, I am something you've brought upon yourself, something you and you alone deserve: pain.'")
+            print1("It laughs maniacally, standing there like a clown at a circus that had a joke.")
+            print1("'Now how about I give you a 5-second head start? I love a chase.'")
+            print1("It says as it draws its knife.")
+            # Choices for Hallway A or B
+            hallway_choice = get_input("\nDo you want to run to (1) Hallway A or (2) Hallway B? ")
+
+            if hallway_choice == "1":
+                print1("\nYou sprint towards Hallway A, your heart pounding.")
+                # Further story continuation for Hallway A...
+            elif hallway_choice == "2":
+                print1("\nYou sprint towards Hallway B, adrenaline pumping through your veins.")
+                # Further story continuation for Hallway B...
+
+        elif self_defense_choice == "2":
+            print1("\nYou reach for your scissors, gripping them tightly as you prepare to defend yourself.")
+            game_state["scissors"] = True  # Set scissors to True
+            print1("The demon giggles. 'Simon, Simon, Simon, you always were a fighter, weren't you?'")
+            print1("'That fight in you must have given your sister such a hard time. I think we both know that.'")
+            print1("The entity tilts its head with a murderous grin.")
+            print1("'What the hell are you!' Simon shouts, scrambling off the floor, getting some distance between him and the entity.")
+            print1("'Oh Mr. Heron, I am something you've brought upon yourself, something you and you alone deserve: pain.'")
+            print1("It laughs maniacally, standing there like a clown at a circus that had a joke.")
+            print1("'Now how about I give you a 5-second head start? I love a chase.'")
+            print1("It says as it draws its knife.")
+
+    elif ipod_choice == "2":
+        print1("\nSimon decides to leave his iPod and get it tomorrow. Yuri was more important anyway.")
+        print1("As he leaves the school, he feels a sense of dread and emptiness as he walks into the blizzard outside.")
+        print1("Ending One.")
+
+# Option 1: Simon's escape down hallway A
+def hallway_a():
+    print1("Simon springs towards the hallway, hoping to find somewhere to hide or run.")
+    print1("He sees the door to the cafeteria, the math classroom, and the stairwell.")
+    print1("He feels the same nurturing presence tugging him towards the stairwell.")
+
+    choice = get_input("Do you want to go to the (1) Cafeteria, (2) Stairwell, or (3) Classroom? ")
+
+    if choice == "1":
+        print1("You head into the cafeteria, it's eerily quiet, but you keep moving, searching for an exit or a hiding place.")
+        # Continue the game with another choice or scene here
+        print1("You see a window that could potentially be opened or a door leading to the kitchen.")
+        # Present new options here, for example:
+        # kitchen_or_window()
+    elif choice == "2":
+        print1("You run towards the stairwell, feeling the presence guiding you. As you descend, you feel like you've put some distance between you and the entity.")
+        # Continue to another decision or scene
+    elif choice == "3":
+        print1("You enter the classroom, it's empty and dark. You search for a way to block the door or find something to protect yourself.")
+        # Continue the game with another choice or scene here
+        print1("You notice a heavy desk you could push against the door, or you could check the windows.")
+        # Present new options here, for example:
+        # block_door_or_window()
+    else:
+        print1("Invalid choice.")
+
+# Option 2: Simon's escape down hallway B
+def hallway_b():
+    print1("You run towards hallway B, seeking salvation.")
+    print1("You see the janitor's closet and the main door.")
+
+    choice = get_input("Do you want to go to the (1) Janitor's Closet or (2) Main Door? ")
+
+    if choice == "1":
+        print1("You try the janitor's closet, it's unlocked. You step inside and find some cleaning supplies and tools that could help.")
+        # Continue the game with another choice or scene here
+        print1("There’s a mop and a hammer on a shelf. You could use one to defend yourself or find another way out.")
+        # Present new options here, for example:
+        # mop_or_hammer()
+    elif choice == "2":
+        print1("You make it to the main door, but it’s locked. You start searching for another way out or maybe something to unlock the door.")
+        # Continue the game with another choice or scene here
+        print1("You notice a fire extinguisher nearby or a vent that could be opened.")
+        # Present new options here, for example:
+        # fire_extinguisher_or_vent()
+    else:
+        print1("Invalid choice.")
+
+
+
+  
+
+
+
+
+    
